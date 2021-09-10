@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import NoteContext from "./NoteContext";
 
@@ -53,8 +54,6 @@ const NoteState = (props) => {
       },
     });
 
-    const json = await response.json();
-
     const newNote = notes.filter((note) => {
       return note._id !== id;
     });
@@ -74,8 +73,6 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-
-    const json = await response.json();
 
     let newNotes = JSON.parse(JSON.stringify(notes));
 

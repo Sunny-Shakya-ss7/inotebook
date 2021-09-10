@@ -85,9 +85,10 @@ router.post(
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res
-          .status(400)
-          .json({ error: "Please try to login with correct credentials" });
+        return res.status(400).json({
+          success: false,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const data = {
@@ -97,7 +98,8 @@ router.post(
       };
 
       const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json({ authtoken });
+
+      res.json({ success: true, authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
