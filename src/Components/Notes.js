@@ -37,7 +37,6 @@ export const Notes = () => {
   };
 
   const handleClick = (e) => {
-    console.log("Updating the note...", note);
     e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
@@ -89,6 +88,8 @@ export const Notes = () => {
                     name="etitle"
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -102,6 +103,8 @@ export const Notes = () => {
                     id="edescription"
                     name="edescription"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -132,6 +135,9 @@ export const Notes = () => {
                 onClick={handleClick}
                 type="button"
                 className="btn btn-primary"
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
               >
                 Update Note
               </button>
@@ -141,6 +147,9 @@ export const Notes = () => {
       </div>
       <div className="row my-3">
         <h2>Your Notes</h2>
+        <div className="container mx-2">
+          {notes.length === 0 && "No notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <Noteitem key={note._id} note={note} updateNote={updateNote} />
