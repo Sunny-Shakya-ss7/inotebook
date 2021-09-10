@@ -17,8 +17,8 @@ export const Login = (props) => {
         password: credentials.password,
       }),
     });
+
     const json = await response.json();
-    console.log(json);
     if (json.success) {
       // Save the auth token and redirect
       localStorage.setItem("token", json.authtoken);
